@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CartApiController;
 use App\Http\Controllers\API\CategoryApiController;
 use App\Http\Controllers\API\CustomerAuthentication;
 use App\Http\Controllers\API\ProductApiController;
@@ -38,7 +39,9 @@ Route::post('/customer/logout', [CustomerAuthentication::class, 'customer_logout
 //category
 Route::get('/get/category', [CategoryApiController::class, 'get_category']);
 
-//category
+//product
 Route::get('/get/product', [ProductApiController::class, 'get_product']);
 Route::get('/get/product/details/{slug}', [ProductApiController::class, 'get_product_details']);
 
+//Cart
+Route::post('/cart/store', [CartApiController::class, 'cart_store']);

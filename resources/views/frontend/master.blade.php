@@ -485,7 +485,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('footer_script')
 
-    <script>
+    {{-- <script>
         $('.search-btn').click(function(){
             var search_input = $('#search_input').val();
             var category_id = $("input[type='radio'][name='category_id']:checked").val();
@@ -567,6 +567,6 @@
             var link = "{{route('shop')}}"+"?tag="+tag;
             window.location.href = link;
         });
-    </script>
+    </script> --}}
 </body>
 </html>
