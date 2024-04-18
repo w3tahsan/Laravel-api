@@ -27,9 +27,10 @@ class CartApiController extends Controller
     }
 
     function cart_info($customer_id){
-        $carts = Cart::where('customer_id', $customer_id)->get();
+        $carts = Cart::where('customer_id', $customer_id)->with('rel_to_product')->with('rel_to_color')->with('rel_to_size')->get();
         $response = [
             'carts'=> $carts,
+            'product_img_link' => env('APP_URL').'/uploads/product/preview/',
         ];
         return response()->json($response);
     }
