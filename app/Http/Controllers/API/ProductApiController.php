@@ -31,7 +31,6 @@ class ProductApiController extends Controller
             'available_sizes' => $available_sizes,
             'product_img_link' => 'uploads/product/preview/'.$product_info->first()->preview,
         ];
-
         return response()->json($response);
     }
 }

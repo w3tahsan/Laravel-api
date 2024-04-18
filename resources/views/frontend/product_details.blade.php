@@ -344,7 +344,7 @@
                         type:'POST',
                         data:{'color_id':color_id, 'product_id':product_id, 'size_id':size_id},
                         success: function (data) {
-                            $('#quan').html(data);
+                            $('#quan').html(data.quantity);
                         }
                     });
 

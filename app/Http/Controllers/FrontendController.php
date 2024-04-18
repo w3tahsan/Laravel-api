@@ -141,7 +141,7 @@ class FrontendController extends Controller
         } else {
             $str = '<strong id="quan" class="btn btn-success" >' . $quantity . ' In Stock</strong>';;
         }
-        echo $str;
+        return response()->json(['quantity'=>$str, 'price'=>'100']);
     }
 
     function review_store(Request $request, $id)
@@ -180,8 +180,6 @@ class FrontendController extends Controller
                 $type = 'DESC';
             }
         }
-
-
 
         $products = Product::where(function ($q) use ($data) {
             $min = 0;
@@ -249,8 +247,6 @@ class FrontendController extends Controller
                 $q->whereBetween('price', [$min, $max]);
             }
         })->orderBy($based, $type)->get();
-
-
 
         $categories = Category::all();
         $colors = Color::all();
