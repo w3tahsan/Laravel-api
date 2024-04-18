@@ -45,4 +45,4 @@ Route::get('/get/product/details/{slug}', [ProductApiController::class, 'get_pro
 
 //Cart
 Route::post('/cart/store', [CartApiController::class, 'cart_store']);
-
+Route::get('/cart/info/{customer_id}', [CartApiController::class, 'cart_info']);

@@ -26,5 +26,12 @@ class CartApiController extends Controller
         return response()->json($response);
     }
 
+    function cart_info($customer_id){
+        $carts = Cart::where('customer_id', $customer_id)->get();
+        $response = [
+            'carts'=> $carts,
+        ];
+        return response()->json($response);
+    }
 
 }
