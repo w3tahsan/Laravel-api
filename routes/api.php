@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->group( function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('/category/store', [CategoryApiController::class, 'category_store']);
     Route::get('/category/show/{id}', [CategoryApiController::class, 'category_show']);
     Route::post('/category/update/{id}', [CategoryApiController::class, 'category_update']);
@@ -46,3 +46,4 @@ Route::get('/get/product/details/{slug}', [ProductApiController::class, 'get_pro
 //Cart
 Route::post('/cart/store', [CartApiController::class, 'cart_store']);
 Route::get('/cart/info/{customer_id}', [CartApiController::class, 'cart_info']);
+Route::post('/cart/update', [CartApiController::class, 'cart_update']);

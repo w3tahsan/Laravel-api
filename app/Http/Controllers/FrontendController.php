@@ -141,7 +141,7 @@ class FrontendController extends Controller
         } else {
             $str = '<strong id="quan" class="btn btn-success" >' . $quantity . ' In Stock</strong>';;
         }
-        return response()->json(['quantity'=>$str, 'price'=>'100']);
+        return response()->json(['quantity' => $str, 'price' => '100']);
     }
 
     function review_store(Request $request, $id)
@@ -167,10 +167,10 @@ class FrontendController extends Controller
 
         if (!empty($data['sort']) && $data['sort'] != '' && $data['sort'] != 'undefined') {
             if ($data['sort'] == 1) {
-                $based = 'price';
+                $based = 'after_discount';
                 $type = 'ASC';
             } else if ($data['sort'] == 2) {
-                $based = 'price';
+                $based = 'after_discount';
                 $type = 'DESC';
             } else if ($data['sort'] == 3) {
                 $based = 'product_name';
@@ -246,7 +246,7 @@ class FrontendController extends Controller
             if (!empty($data['min']) && $data['min'] != '' && $data['min'] != 'undefined' || !empty($data['max']) && $data['max'] != '' && $data['max'] != 'undefined') {
                 $q->whereBetween('price', [$min, $max]);
             }
-        })->orderBy($based, $type)->get();
+        })->orderBy($based, $type)->Paginate(2);
 
         $categories = Category::all();
         $colors = Color::all();

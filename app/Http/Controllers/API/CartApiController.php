@@ -8,9 +8,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CartApiController extends Controller
+class    CartApiController extends Controller
 {
-    function cart_store(Request $request){
+    function cart_store(Request $request)
+    {
         $carts = Cart::create([
             'customer_id' => $request->customer_id,
             'product_id' => $request->product_id,
@@ -20,19 +21,32 @@ class CartApiController extends Controller
             'created_at' => Carbon::now(),
         ]);
         $response = [
-            'carts'=> $carts,
+            'carts' => $carts,
             'message' => 'Cart Added Successfully',
         ];
         return response()->json($response);
     }
 
-    function cart_info($customer_id){
+    function cart_info($customer_id)
+    {
         $carts = Cart::where('customer_id', $customer_id)->with('rel_to_product')->with('rel_to_color')->with('rel_to_size')->get();
         $response = [
-            'carts'=> $carts,
-            'product_img_link' => env('APP_URL').'/uploads/product/preview/',
+            'carts' => $carts,
+            'product_img_link' => env('APP_URL') . '/uploads/product/preview/',
         ];
         return response()->json($response);
     }
 
+    function cart_update(Request $request)
+    {
+        foreach ($request->quantity as $cart_id => $quantity) {
+            Cart::find($cart_id)->update([
+                'quantity' => $quantity,
+            ]);
+        }
+        $response = [
+            'success' => 'cart Updated',
+        ];
+        return response()->json($response);
+    }
 }
