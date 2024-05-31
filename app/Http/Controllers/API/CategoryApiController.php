@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,8 +15,17 @@ class CategoryApiController extends Controller
 {
     function get_category()
     {
-        $categories = Category::select('category_name', 'icon')->get();
+        $categories = Category::latest()->take(8)->get();
         return response()->json($categories);
+    }
+    function get_category_products($id)
+    {
+        $products = Product::where('category_id',$id)->get();
+        $preview = env('APP_URL').'/uploads/product/preview/';
+        return response()->json([
+            "data" =>$products,
+            'preview' => $preview
+        ]);
     }
 
     function category_store(Request $request)

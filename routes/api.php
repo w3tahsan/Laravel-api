@@ -38,6 +38,7 @@ Route::post('/customer/logout', [CustomerAuthentication::class, 'customer_logout
 
 //category
 Route::get('/get/category', [CategoryApiController::class, 'get_category']);
+Route::get('/get/category/products/{id}', [CategoryApiController::class, 'get_category_products']);
 
 //product
 Route::get('/get/product', [ProductApiController::class, 'get_product']);
