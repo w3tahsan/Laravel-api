@@ -21,7 +21,7 @@ class ProductApiController extends Controller
     function get_product_details($slug){
         $product_id = Product::where('slug', $slug)->first()->id;
         $product_info = Product::where('slug', $slug)->with('rel_to_cat')->with('rel_to_brand')->first();
-        $gals = ProductGallery::where('product_id', $product_info->first()->id)->get();
+        $gals = ProductGallery::where('product_id', $product_info->id)->get();
         $available_colors = Inventory::where('product_id', $product_id)
             ->groupBy('color_id')
             ->selectRaw('sum(color_id) as sum, color_id')
