@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class    CartApiController extends Controller
+class  CartApiController extends Controller
 {
     function cart_store(Request $request)
     {
@@ -47,11 +47,21 @@ class    CartApiController extends Controller
 
     function cart_update(Request $request)
     {
-        foreach ($request->quantity as $cart_id => $quantity) {
-            Cart::find($cart_id)->update([
-                'quantity' => $quantity,
+        // return $request->quantity;
+        foreach($request->quantity as $cart){
+            Cart::find($cart['id'])->update([
+                'quantity' => $cart['quantity'],
             ]);
         }
+        $response = [
+            'success' => 'cart Updated',
+        ];
+        return response()->json($response);
+    }
+    function cart_remove($id)
+    {
+        // return $request->quantity;
+        Cart::find($id)->delete();
         $response = [
             'success' => 'cart Updated',
         ];

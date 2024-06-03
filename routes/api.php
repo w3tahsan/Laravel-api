@@ -38,6 +38,7 @@ Route::post('/customer/logout', [CustomerAuthentication::class, 'customer_logout
 
 //category
 Route::get('/get/category', [CategoryApiController::class, 'get_category']);
+Route::get('/get/category/products/{id}', [CategoryApiController::class, 'get_category_products']);
 
 //product
 Route::get('/get/product', [ProductApiController::class, 'get_product']);
@@ -47,3 +48,4 @@ Route::get('/get/product/details/{slug}', [ProductApiController::class, 'get_pro
 Route::post('/cart/store', [CartApiController::class, 'cart_store']);
 Route::get('/cart/info/{customer_id}', [CartApiController::class, 'cart_info']);
 Route::post('/cart/update', [CartApiController::class, 'cart_update']);
+Route::get('/cart/remove/{id}', [CartApiController::class, 'cart_remove']);
