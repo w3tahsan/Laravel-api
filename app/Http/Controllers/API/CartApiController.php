@@ -12,19 +12,27 @@ class    CartApiController extends Controller
 {
     function cart_store(Request $request)
     {
-        $carts = Cart::create([
-            'customer_id' => $request->customer_id,
-            'product_id' => $request->product_id,
-            'color_id' => $request->color_id,
-            'size_id' => $request->size_id,
-            'quantity' => $request->quantity,
-            'created_at' => Carbon::now(),
-        ]);
-        $response = [
-            'carts' => $carts,
-            'message' => 'Cart Added Successfully',
-        ];
-        return response()->json($response);
+        if (Cart::where('product_id', $request->product_id)->where('color_id', $request->color_id)->where('size_id',    $request->size_id)->where('customer_id', $request->customer_id)->exists()) {
+            Cart::where('product_id', $request->product_id)->where('color_id', $request->color_id)->where('size_id', $request->size_id)->where('customer_id', $request->customer_id)->increment('quantity', $request->quantity);
+            $response = [
+                'message' => 'Cart Udated Successfully',
+            ];
+            return response()->json($response);
+        } else {
+            $carts = Cart::create([
+                'customer_id' => $request->customer_id,
+                'product_id' => $request->product_id,
+                'color_id' => $request->color_id,
+                'size_id' => $request->size_id,
+                'quantity' => $request->quantity,
+                'created_at' => Carbon::now(),
+            ]);
+            $response = [
+                'carts' => $carts,
+                'message' => 'Cart Added Successfully',
+            ];
+            return response()->json($response);
+        }
     }
 
     function cart_info($customer_id)

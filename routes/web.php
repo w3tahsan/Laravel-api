@@ -18,6 +18,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PassResetController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SmsController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariationController;
@@ -203,3 +204,7 @@ Route::get('api/category', [FrontendController::class, 'api_category']);
 
 // Log
 Route::get('/log/info', [LogController::class, 'log_info'])->name('log.info');
+
+//sms
+Route::get('/sms', [SmsController::class, 'sms'])->name('sms');
+Route::post('/sms/send', [SmsController::class, 'sms_send'])->name('sms.send');
