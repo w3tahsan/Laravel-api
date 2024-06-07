@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\ApiCheckoutController;
+use App\Http\Controllers\API\ApiCountynCityController;
 use App\Http\Controllers\API\CartApiController;
 use App\Http\Controllers\API\CategoryApiController;
 use App\Http\Controllers\API\CustomerAuthentication;
@@ -49,3 +51,10 @@ Route::post('/cart/store', [CartApiController::class, 'cart_store']);
 Route::get('/cart/info/{customer_id}', [CartApiController::class, 'cart_info']);
 Route::post('/cart/update', [CartApiController::class, 'cart_update']);
 Route::get('/cart/remove/{id}', [CartApiController::class, 'cart_remove']);
+
+//city and country
+Route::get('/country/city', [ApiCountynCityController::class, 'country_city']);
+
+
+//Checkout
+Route::post('/checkout/store', [ApiCheckoutController::class, 'checkout_store']);

@@ -246,7 +246,7 @@ class FrontendController extends Controller
             if (!empty($data['min']) && $data['min'] != '' && $data['min'] != 'undefined' || !empty($data['max']) && $data['max'] != '' && $data['max'] != 'undefined') {
                 $q->whereBetween('price', [$min, $max]);
             }
-        })->orderBy($based, $type)->Paginate(2);
+        })->orderBy($based, $type)->get();
 
         $categories = Category::all();
         $colors = Color::all();
